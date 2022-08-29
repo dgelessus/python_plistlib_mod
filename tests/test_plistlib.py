@@ -11,7 +11,13 @@ import codecs
 import binascii
 import collections
 from test import support
-from test.support import os_helper
+try:
+    from test.support.os_helper import TESTFN
+except ImportError: # ModuleNotFoundError since Python 3.6
+    test_support_3_10 = False
+    from test.support import TESTFN
+else:
+    test_support_3_10 = True
 from io import BytesIO
 
 from plistlib_mod import UID
@@ -404,7 +410,7 @@ class TestPlistlib(unittest.TestCase):
 
     def tearDown(self):
         try:
-            os.unlink(os_helper.TESTFN)
+            os.unlink(TESTFN)
         except:
             pass
 
@@ -442,10 +448,10 @@ class TestPlistlib(unittest.TestCase):
 
     def test_io(self):
         pl = self._create()
-        with open(os_helper.TESTFN, 'wb') as fp:
+        with open(TESTFN, 'wb') as fp:
             plistlib.dump(pl, fp)
 
-        with open(os_helper.TESTFN, 'rb') as fp:
+        with open(TESTFN, 'rb') as fp:
             pl2 = plistlib.load(fp)
 
         self.assertEqual(dict(pl), dict(pl2))
@@ -907,9 +913,10 @@ class TestBinaryPlistlib(unittest.TestCase):
     def test_deep_nesting(self):
         for N in [300, 100000]:
             chunks = [b'\xa1' + (i + 1).to_bytes(4, 'big') for i in range(N)]
+            chunks.append(b'\x54seed')
             try:
-                result = self.decode(*chunks, b'\x54seed', offset_size=4, ref_size=4)
-            except RecursionError:
+                result = self.decode(*chunks, offset_size=4, ref_size=4)
+            except RuntimeError: # RecursionError since Python 3.5
                 pass
             else:
                 for i in range(N):
@@ -944,12 +951,17 @@ class TestBinaryPlistlib(unittest.TestCase):
                          -0x123456789abcdf0)
 
     def test_unsupported(self):
-        unsupported = [*range(1, 8), *range(10, 15),
-                       0x20, 0x21, *range(0x24, 0x33), *range(0x34, 0x40)]
+        unsupported = (
+            list(range(1, 8))
+            + list(range(10, 15))
+            + [0x20, 0x21]
+            + list(range(0x24, 0x33))
+            + list(range(0x34, 0x40))
+        )
         for i in [0x70, 0x90, 0xb0, 0xc0, 0xe0, 0xf0]:
             unsupported.extend(i + j for j in range(16))
         for token in unsupported:
-            with self.subTest(f'token {token:02x}'):
+            with self.subTest('token {:02x}'.format(token)):
                 with self.assertRaises(plistlib.InvalidFileException):
                     self.decode(bytes([token]) + b'\x00'*16)
 
@@ -993,9 +1005,13 @@ class TestKeyedArchive(unittest.TestCase):
 
 
 class MiscTestCase(unittest.TestCase):
+    @unittest.skipUnless(hasattr(support, "check__all__"), "test.support.check__all__ not available on this Python version")
     def test__all__(self):
         not_exported = {"PlistFormat", "PLISTHEADER"}
-        support.check__all__(self, plistlib, not_exported=not_exported)
+        if test_support_3_10:
+            support.check__all__(self, plistlib, not_exported=not_exported)
+        else:
+            support.check__all__(self, plistlib, blacklist=not_exported)
 
 
 if __name__ == '__main__':

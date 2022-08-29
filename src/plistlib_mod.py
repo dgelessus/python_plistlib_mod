@@ -493,7 +493,7 @@ class _BinaryPlistParser:
     def _read_ints(self, n, size):
         data = self._fp.read(size * n)
         if size in _BINARY_FORMAT:
-            return struct.unpack(f'>{n}{_BINARY_FORMAT[size]}', data)
+            return struct.unpack('>' + str(n) + _BINARY_FORMAT[size], data)
         else:
             if not size or len(data) != size * n:
                 raise InvalidFileException()
