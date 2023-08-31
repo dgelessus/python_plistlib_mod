@@ -1,17 +1,18 @@
 # `plistlib_mod`
 
-A slightly enhanced/modified version of the [plistlib](https://docs.python.org/3/library/plistlib.html) module from the Python 3.10 standard library,
+A slightly enhanced/modified version of the [plistlib](https://docs.python.org/3/library/plistlib.html) module from the Python 3.11 standard library,
 backported to Python 3.4 and later.
 
 ## Features
 
 At the moment,
-`plistlib_mod` matches the `plistlib` standard library module from Python 3.10.6,
+`plistlib_mod` matches the `plistlib` standard library module from Python 3.11.5,
 but is compatible with Python 3.4 and later.
 In particular,
 it includes the following features and fixes,
 which are otherwise not available on older Python versions:
 
+* Fix typo in error message in plistlib ([GH-97540](https://github.com/python/cpython/pull/97540)) (from 3.11+, 3.10.8)
 * [bpo-42249](https://bugs.python.org/issue42249): Fix writing binary Plist files larger than 4 GiB. (from 3.10+, 3.9.1, 3.8.7)
 * [bpo-42103](https://bugs.python.org/issue42103): Improve validation of Plist files. (from 3.10+, 3.9.1, 3.8.7, 3.7.10, 3.6.13)
 * [bpo-41491](https://bugs.python.org/issue41491): `plistlib`: accept hexadecimal integer values in xml plist files (from 3.10+, 3.9.1, 3.8.7)
@@ -71,4 +72,5 @@ See the [LICENSE](./LICENSE) file for details.
 ### Version 0.1.0 (next version)
 
 * Initial release.
-* Matches `plistlib` from Python 3.10.6.
+* Based on `plistlib` from Python 3.11.5,
+  with small compatibility changes.
