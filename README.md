@@ -13,13 +13,13 @@ it includes the following features and fixes,
 which are otherwise not available on older Python versions:
 
 * Fix typo in error message in plistlib ([GH-97540](https://github.com/python/cpython/pull/97540)) (from 3.11+, 3.10.8)
-* [bpo-42249](https://bugs.python.org/issue42249): Fix writing binary Plist files larger than 4 GiB. (from 3.10+, 3.9.1, 3.8.7)
-* [bpo-42103](https://bugs.python.org/issue42103): Improve validation of Plist files. (from 3.10+, 3.9.1, 3.8.7, 3.7.10, 3.6.13)
-* [bpo-41491](https://bugs.python.org/issue41491): `plistlib`: accept hexadecimal integer values in xml plist files (from 3.10+, 3.9.1, 3.8.7)
-* [bpo-42051](https://bugs.python.org/issue42051): Reject XML entity declarations in plist files (from 3.10+, 3.9.1, 3.8.7, 3.7.10, 3.6.13)
-* [bpo-26707](https://bugs.python.org/issue26707): Enable `plistlib` to read UID keys. (from 3.8+)
-* [bpo-32072](https://bugs.python.org/issue32072): Fix issues with binary plists. (from 3.7+, 3.6.4, 3.5.5, 3.4.8)
-* [bpo-31897](https://bugs.python.org/issue31897): Convert unexpected errors when read bogus binary plists into `InvalidFileException`. (from 3.7+, 3.6.4)
+* [bpo-42249](https://bugs.python.org/issue42249): Fix writing binary Plist files larger than 4 GiB. ([GH-23121](https://github.com/python/cpython/pull/23121)) (from 3.10+, 3.9.1, 3.8.7)
+* [bpo-42103](https://bugs.python.org/issue42103): Improve validation of Plist files. ([GH-22882](https://github.com/python/cpython/pull/22882)) (from 3.10+, 3.9.1, 3.8.7, 3.7.10, 3.6.13)
+* [bpo-41491](https://bugs.python.org/issue41491): `plistlib`: accept hexadecimal integer values in xml plist files ([GH-22764](https://github.com/python/cpython/pull/22764)) (from 3.10+, 3.9.1, 3.8.7)
+* [bpo-42051](https://bugs.python.org/issue42051): Reject XML entity declarations in plist files ([#22760](https://github.com/python/cpython/pull/22760)) (from 3.10+, 3.9.1, 3.8.7, 3.7.10, 3.6.13)
+* [bpo-26707](https://bugs.python.org/issue26707): Enable `plistlib` to read UID keys. ([GH-12153](https://github.com/python/cpython/pull/12153)) (from 3.8+)
+* [bpo-32072](https://bugs.python.org/issue32072): Fix issues with binary plists. ([#4455](https://github.com/python/cpython/pull/4455)) (from 3.7+, 3.6.4, 3.5.5, 3.4.8)
+* [bpo-31897](https://bugs.python.org/issue31897): Convert unexpected errors when read bogus binary plists into `InvalidFileException`. ([#4171](https://github.com/python/cpython/pull/4171)) (from 3.7+, 3.6.4)
 * [bpo-28321](https://bugs.python.org/issue28321): Fixed writing non-BMP characters with binary format in `plistlib`. (from 3.5.3+)
 * [bpo-27109](https://bugs.python.org/issue27109): Add `InvalidFileException` to `__all__`, by Jacek Kołodziej (from 3.6+)
 * [bpo-26711](https://bugs.python.org/issue26711): Fixed the comparison of `plistlib.Data` with other types. (from 3.5.2+)
@@ -30,8 +30,8 @@ which are otherwise not available on older Python versions:
 The following deprecated APIs have been removed,
 like in newer Python versions:
 
-* [bpo-36409](https://bugs.python.org/issue36409): Remove old `plistlib` API deprecated in 3.4 (removed in 3.9)
-* [bpo-29196](https://bugs.python.org/issue29196): Removed old-deprecated classes `Plist`, `Dict` and `_InternalDict` (removed in 3.7)
+* [bpo-36409](https://bugs.python.org/issue36409): Remove old `plistlib` API deprecated in 3.4 ([GH-15615](https://github.com/python/cpython/pull/15615)) (removed in 3.9)
+* [bpo-29196](https://bugs.python.org/issue29196): Removed old-deprecated classes `Plist`, `Dict` and `_InternalDict` ([#488](https://github.com/python/cpython/pull/488)) (removed in 3.7)
 
 ## Installation
 
