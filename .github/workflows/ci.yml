@@ -47,7 +47,7 @@ jobs:
         with:
           python-version: "3.6"
       - run: python -m pip install --upgrade tox
-      - run: tox -e py{34,35,36}
+      - run: tox -e "py{34,35,36}"
   test-ubuntu-22-04:
     runs-on: ubuntu-22.04
     steps:
@@ -68,4 +68,4 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m pip install --upgrade tox
-      - run: tox -e py{37,38,39,310,311},package
+      - run: tox -e "py{37,38,39,310,311},package"
